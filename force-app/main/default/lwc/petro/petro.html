@@ -1,0 +1,43 @@
+<template>
+    <lightning-card title="Meeting Organiser">
+      <div class="slds-m-around_medium">
+        <lightning-combobox
+          name="accounts"
+          label="Select Location"
+          variant="label-hidden"
+          placeholder="Choose visit location"
+          value={value}
+          onchange={handleAccountSelection}
+          options={accountOptions}>
+        </lightning-combobox>
+        <lightning-input
+          class="slds-m-vertical_small"
+          type="text"
+          label="Enter Purpose of Visit"
+          onchange={handlePurposeChange}>
+        </lightning-input>
+        <div class="slds-grid">
+          <div class="slds-cols slds-m-right_medium">
+            <lightning-button
+              class="slds-m-vertical_small"
+              variant="brand"
+              title="Check In"
+              label="Check In"
+              disabled={disableCheckIn}
+              onclick={checkIn}>
+            </lightning-button>  
+          </div>
+          <div class="slds-cols">
+            <lightning-button
+              class="slds-m-vertical_small"
+              variant="brand"
+              title="Check Out"
+              label="Check Out"
+              onclick={checkOut}
+              disabled={disableCheckOut}>
+            </lightning-button>
+          </div>
+        </div>
+      </div>
+    </lightning-card>
+</template>

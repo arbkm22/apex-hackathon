@@ -1,0 +1,154 @@
+<template>
+    <lightning-card title="Create Account">
+      <div class="slds-m-around_medium">
+        <lightning-button
+          label="New Account" 
+          title="New Account"
+          variant="brand"
+          onclick={showModal}>
+        </lightning-button>
+        <template if:true={openModal}>
+          <section
+            role="dialog"
+            tabindex="-1"
+            aria-labelledby="modal-heading-01"
+            aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+              <header class="slds-modal__header">
+                <lightning-button-icon
+                  class="slds-modal__close"
+                  title="Close"
+                  icon-name="utility:close"
+                  icon-class="slds-button_icon-inverse"
+                  onclick={closeModal}>
+                </lightning-button-icon>
+                <h2 class="slds-text-heading_medium">New Account</h2>
+              </header>
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <h3 class="slds-section__title slds-theme--shade">
+                  <span class="section-header__title slds-p-horizontal--small">Account Information</span>
+                </h3>
+                <div class="slds-m-around_medium">
+                  <!-- first row -->
+                  <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-form-element">
+                      <label class="slds-form-element__label">
+                        <abbr class="slds-required" title="required">* </abbr>Account Name</label>
+                      <div class="slds-form-element__control">
+                        <input type="text" required="" class="slds-input" onchange={handleNameChange}></input>
+                      </div>
+                    </div>
+                    <div class="slds-col slds-form-element">
+                      <label class="slds-form-element__label">Phone</label>
+                      <div class="slds-form-element__control">
+                        <input type="tel" class="slds-input" maxlength="40" onchange={handlePhoneChange}></input>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- second row -->
+                  <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-form-element">
+                      <label class="slds-form-element__label">Account Number</label>
+                      <div class="slds-form-element__control">
+                        <input type="text" class="slds-input" onchange={handleNumberChange}></input>
+                      </div>
+                    </div>
+                    <div class="slds-col slds-form-element">
+                      <label class="slds-form-element__label">Website</label>
+                      <div class="slds-form-element__control">
+                        <input type="tel" class="slds-input" onchange={handleWebsiteChange}></input>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- third row -->
+                  <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-form-element">
+                      <lightning-combobox name="Type" label="Type" value={typeValue} options={typeOptions} onchange={handleTypeChange}></lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-form-element">
+                      <lightning-combobox name="Ownership" label="Ownership" value={ownershipValue} options={ownershipOptions} onchange={handleOwnershipChange}></lightning-combobox>
+                    </div>
+                  </div>
+                  <!-- fourth row -->
+                  <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-form-element slds-size_1-of-2">
+                      <lightning-combobox name="Industry" label="Industry" value={industryValue} options={industryOptions} onchange={handleIndustryChange}></lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-form-element slds-size_1-of-2">
+                      <lightning-input type="text" name="Employees" label="Employees" onchange={handleEmployeesChange}></lightning-input>
+                    </div>
+                  </div>
+                </div>
+                <h3 class="slds-section__title slds-theme--shade slds-m-top_small">
+                  <span class="section-header__title slds-p-horizontal--small">Address Information</span>
+                </h3>
+                <div class="slds-grid slds-gutters slds-m-around_medium">
+                  <div class="slds-col slds-form-element">
+                    <label class="slds-form-element__label slds-text-title_bold">Billing Address</label>
+                    <lightning-textarea name="Billing Street" label="Billing Street" onchange={handleBillingStreetChange}></lightning-textarea>
+                  </div>
+                  <div class="slds-col slds-form-element">
+                    <label class="slds-form-element__label slds-text-title_bold">Shipping Address</label>
+                    <lightning-textarea name="Shipping Street" label="Shipping Street" onchange={handleShippingStreetChange}></lightning-textarea>
+                  </div>
+                </div>
+                <div class="slds-grid slds-gutters slds-m-around_medium">
+                  <div class="slds-col slds-form-element">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_2-of-3">
+                        <lightning-input name="Billing City" label="Billing City" onchange={handleBillingCityChange}></lightning-input>
+                      </div>
+                      <div class="slds-col slds-size_1-of-3">
+                        <lightning-input name="Billing State" label="Billing State/Province" onchange={handleBillingStateChange}></lightning-input>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-col slds-form-element">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_2-of-3">
+                        <lightning-input name="Billing City" label="Shipping City" onchange={handleShippingCityChange}></lightning-input>
+                      </div>
+                      <div class="slds-col slds-size_1-of-3">
+                        <lightning-input name="Billing State" label="Shipping State/Province" onchange={handleShippingStateChange}></lightning-input>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-grid slds-gutters slds-m-around_medium">
+                  <div class="slds-col slds-form-element">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_2-of-3">
+                        <lightning-input name="Billing City" label="Billing Zip/Postal Code" onchange={handleBillingZipChange}></lightning-input>
+                      </div>
+                      <div class="slds-col slds-size_1-of-3">
+                        <lightning-input name="Billing State" label="Billing Country" onchange={handleBillingCountryChange}></lightning-input>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-col slds-form-element">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_2-of-3">
+                        <lightning-input name="Billing City" label="Shipping Zip/Postal Code" onchange={handleShippingZipChange}></lightning-input>
+                      </div>
+                      <div class="slds-col slds-size_1-of-3">
+                        <lightning-input name="Billing State" label="Shipping Country" onchange={handleShippingCountryChange}></lightning-input>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-modal__footer">
+                <div class="slds-align_absolute-center">
+                  <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={closeModal}>Cancel</button>
+                  <button class="slds-button slds-button_brand" onclick={createAccount}>Save</button>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+      </div>
+    </lightning-card>
+</template>
